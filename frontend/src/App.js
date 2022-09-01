@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import "./App.css";
 import Signup from "./Pages/Signup";
 import Home from "./Pages/Home";
+import Login from "./Pages/Login";
 
 function App() {
 	const curPage = useSelector((store) => store.currentPage);
@@ -9,15 +10,18 @@ function App() {
 	let output;
 
 	switch (curPage) {
-		case "home":
-			output = <Home />;
+    case "home":
+      output = <Home />;
       break;
     case "signup":
-      output=<Signup/>
+      output = <Signup />;
       break;
+    case "login":
+      output = <Login/>;
+      break
     default:
-      output=<h1> 404 error</h1>
-	}
+      output = <h1> 404 error</h1>;
+  }
 
 	return output;
 }
