@@ -1,0 +1,112 @@
+#navbar {
+	height: 40px;
+	background-color: rgb(255, 75, 75);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0px 30px;
+	padding-left: 24px;
+}
+
+#navbar > div {
+	display: flex;
+	align-items: center;
+	width: 49%;
+	gap: 10px;
+}
+
+#navbar > div:last-child {
+	justify-content: flex-end;
+}
+
+#navbar > div:last-child>div:last-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+    background-color: white;
+    border-radius: 50%;
+    font-weight: 600;
+    color: rgb(105, 2, 105);
+}
+
+#navbar > div > div svg {
+	color: white;
+}
+
+#navbar > div > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3px;
+	border-radius: 3px;
+}
+
+#navbar > div:first-child > div:last-child {
+	position: relative;
+}
+
+#navbar > div:first-child > div:last-child::before {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	font-family: "Material Icons";
+	content: "search";
+	width: 24px;
+	height: 24px;
+    font-size: 28px;
+    font-weight: 100;
+	z-index: 4;
+	color: white;
+	left: 8px;
+    top:7px;
+}
+
+#navbar input {
+	width: 100px;
+	height: 28px;
+	border-radius: 4px;
+	background-color: rgb(255, 120, 120);
+	outline: none;
+	border: none;
+	position: relative;
+	z-index: 3;
+}
+
+
+#drawerChild>div{
+    display: flex;
+    height: 36px;
+    align-items: center;
+    border-radius: 4px;
+    gap: 16px;
+    margin-left: 20px;
+    padding-left: 12px;
+}
+
+#drawerChild svg{
+    margin-top: 3px;
+}
+
+.css-6e3h0h .css-79z5gx{
+    -webkit-padding-end: 10px;
+}
+
+#drawerChild>div:first-child{
+    margin-top: 30px;
+}
+
+#drawerChild>div:first-child svg{
+    color: green;
+}
+
+#drawerChild>div:nth-child(2) svg{
+    color: rgb(100, 4, 100);
+}
+
+.active{
+    background-color: rgb(225, 225, 225);
+}
+
+
