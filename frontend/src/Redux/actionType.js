@@ -1,0 +1,1 @@
+export const Switch_page="switch_page"
