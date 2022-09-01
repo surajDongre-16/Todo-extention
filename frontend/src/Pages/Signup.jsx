@@ -1,11 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as action from "../Redux/action";
 
 const Signup = () => {
+	const curPage = useSelector((store) => store.currentPage);
+	console.log(curPage);
+	const dispatch = useDispatch();
+
 	return (
-		<Link to="/home">
-			<div>Signup</div>
-		</Link>
+		<div
+			onClick={() => {
+				dispatch(action.switch_page("home"));
+			}}
+		>
+			Signup
+		</div>
 	);
 };
 
