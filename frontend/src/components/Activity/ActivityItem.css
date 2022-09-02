@@ -1,0 +1,56 @@
+.activityItem {
+	display: flex;
+	border-top: 1px solid rgb(214, 214, 214);
+	align-items: center;
+    padding:16px 0px;
+}
+
+.activityItem > div:first-child {
+	border-radius: 50%;
+	position: relative;
+	font-size: 24px;
+	font-weight: 600;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	justify-content: center;
+	color: rgb(2, 166, 166);
+	border: 3px solid rgb(2, 166, 166);
+}
+
+.activityItem > .pending::after {
+	content: "+";
+	position: absolute;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	height: 18px;
+	left: 32px;
+    padding: 0px 2px;
+	padding-bottom: 5px;
+	bottom: 0;
+	font-size: 22px;
+	font-weight: 600;
+	border-radius: 50%;
+	background-color: rgb(255, 127, 72);
+	color: white;
+}
+
+.activityItem > .completed::after{
+    font-family: "Material Icons";
+    content: "done";
+	position: absolute;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	height: 18px;
+	left: 32px;
+    padding: 0px 2px;
+	padding-bottom: 0px;
+	bottom: 0;
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 50%;
+	background-color: rgb(7, 146, 0);
+	color: white;
+}
