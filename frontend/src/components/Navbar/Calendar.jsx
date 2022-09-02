@@ -24,7 +24,7 @@ const CalendarComp = ({ onClick }) => {
 
   return (
     <>
-      <Button onClick={onOpen} bg="blue.500" colorScheme={"blue"} color="white">
+      <Button onClick={onOpen}>
         <CalendarMonthIcon />
         <Text ml="0.5rem">Today</Text>
       </Button>
@@ -44,6 +44,7 @@ const CalendarComp = ({ onClick }) => {
               onChange={(event) =>{
                 handleDate(event)
                 onChange(event)
+                onClose()
             }}
               value={value}
             />
