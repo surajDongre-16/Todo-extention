@@ -22,12 +22,12 @@ const TodoList = () => {
  <Flex p={3} w="400px"  justifyContent="space-around" >
   <Box h="auto" >
    
-  <Checkbox size='sm' colorScheme='green' mt="-4px"  border="grey">{el.title}</Checkbox>
- <Text>{el.des}</Text>
+  <Checkbox size='sm' colorScheme='green' mt="-4px"  border="grey" fontWeight="bold" color="#36454F" >{el.title} <sapan style={{color:"teal"}}>(project)</sapan></Checkbox>
+ <Text fontSize="14px" color="grey">{el.des}</Text>
   </Box>
 
 
- <Flex w="10px"  flexDirection="column" gap={5} ml="auto">
+ <Flex w="10px"  flexDirection="column" alignItems="center" gap={5} ml="auto">
 
  <DeleteIcon color="red.500"  />
 
