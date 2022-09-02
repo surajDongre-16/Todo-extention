@@ -6,10 +6,12 @@ import Navbar from "../components/Navbar/Navbar";
 import TodoList from "../components/todoUi/TodoList";
 
 const Upcoming = () => {
-	const today = new Date();
-	const curDate = today.getDate();
+	const todo = useSelector((store) => store.todo);
+	// const today = new Date()
+	const today = new Date().toLocaleDateString().split("/").join("");
+	// const curDate = today.getDate();
 	const [trig, setTrig] = useState(false);
-	const id = JSON.parse(localStorage.getItem("user"))._id;
+	// const id = JSON.parse(localStorage.getItem("user"))._id;
 
 	// const sendRequest = async () => {
 	// 	const res = await axios
@@ -18,20 +20,20 @@ const Upcoming = () => {
 	// 	const data = await res.data;
 	// 	return data;
 	// };
+	// console.log(today,"today")
 
-	const todo = useSelector((store) => store.todo);
+    // let x = todo.filter((ele) => Number(ele.date.split("/").join("")) > Number(today))
+    //   .map((item) => console.log(item, "item"));
+// 	const [ageke, setageke] = useState(
+//   );
+// console.log(x,"next")
+// 	console.log(today, "ajka");
 	const [upcominTasks, setupcomingTask] = useState(
-		todo.filter((ele) => {
-			let date = Number(ele.date.split("/")[2]);
-			return curDate <= date && !ele.status;
-		})
-	);
-
+    todo.filter((ele) => Number(ele.date.split("/").join("")) > Number(today))
+  );
+	// console.log(upcominTasks,"ageka")
 	useEffect(()=>{
-		setupcomingTask(todo.filter((ele) => {
-			let date = Number(ele.date.split("/")[2]);
-			return curDate <= date && !ele.status;
-		}))
+		setupcomingTask(todo.filter((ele) => Number(ele.date.split("/").join("")) > Number(today)))
 	},[todo])
 
 	return (
