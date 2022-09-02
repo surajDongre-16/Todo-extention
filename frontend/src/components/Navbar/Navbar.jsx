@@ -35,19 +35,21 @@ import { FiLogOut } from "react-icons/fi";
 import { MdToday } from "react-icons/md";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { BsCheckCircle } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Redux/action";
+
 
 
 
 const Navbar = ({setTrig}) => {
 	  const dispatch = useDispatch();
+
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [activeTab, setActiveTab] = useState("today");
 	const handleClick = (str) => {
-		setActiveTab(str);
+		dispatch(action.switch_page(str));
 		onClose();
 	};
+  const activeTab=useSelector(store=>store.currentPage)
 
 	const user=JSON.parse(localStorage.getItem("user"))
 	const initials=user.name.split(" ")
@@ -66,9 +68,9 @@ const Navbar = ({setTrig}) => {
               <DrawerBody id="drawerChild">
                 <div
                   onClick={(e) => {
-                    handleClick("today");
+                    handleClick("home");
                   }}
-                  className={activeTab === "today" ? "active" : ""}
+                  className={activeTab === "home" ? "active" : ""}
                 >
                   <TodayIcon />
                   <p>Today</p>
