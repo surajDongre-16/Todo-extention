@@ -25,6 +25,8 @@ const Home = () => {
     sendRequest().then((data) => {setTodos(data.todos);dispatch(action.setTodo(data.todos))});
   }, [trig]);
 
+  console.log(todos)
+
 //   useEffect(() => {
 //     const getUser = () => {
 //       fetch("http://localhost:5000/user/google/success", {
