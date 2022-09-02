@@ -107,7 +107,6 @@ const Navbar = () => {
 				<div>
 					<NotificationsIcon />
 				</div>
-				<div></div>
 
 				<div>
 					<Menu>
