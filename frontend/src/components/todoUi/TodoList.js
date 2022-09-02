@@ -34,6 +34,12 @@ const TodoList = ({ todo, setTrig }) => {
         .catch((e) => console.log(e));
   };
 
+  const handleDelete= async(e)=>{
+    await axios.delete(`http://localhost:5000/todo/${e._id}`).then((r)=>  handleTrig())
+    .catch((e) => console.log(e));
+
+  }
+
   return (
     <VStack>
     {todo?.map((el)=>(
@@ -70,7 +76,7 @@ const TodoList = ({ todo, setTrig }) => {
               gap={5}
               ml="auto"
             >
-              <DeleteIcon color="red.500"   />
+              <DeleteIcon color="red.500"      onClick={(e)=> handleDelete(el)} />
 
               <Edit todo={el} onClick={handleTrig} />
             </Flex>
