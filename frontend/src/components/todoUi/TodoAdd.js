@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, Input,Button,Spacer,Flex,Box } from '@chakra-ui/react'
+import { Stack, Input,Button,Spacer,Flex,Box,Select } from '@chakra-ui/react'
 
 import { CalendarIcon } from '@chakra-ui/icons'
 
@@ -26,11 +26,11 @@ const TodoAdd = () => {
          />
          <Flex mt="2" >
      
-        <select>
+        <Select w="120px" h="25px">
         <option>select</option>
-          <option>personal</option>
-          <option>work</option>
-        </select>
+          <option value="personal">personal</option>
+          <option value="work">work</option>
+        </Select>
          <CalendarIcon mt={1} ml="3"/>
          <Spacer />
          <Box pr="4">
