@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Completed from "./Pages/Completed";
 import Upcoming from "./Pages/Upcoming";
+import ActivityList from "./Pages/ActivityList";
 
 function App() {
 	const curPage = useSelector((store) => store.currentPage);
@@ -26,6 +27,9 @@ function App() {
       break;
     case "upcoming":
       output=<Upcoming/>
+      break;
+    case "activity":
+      output=<ActivityList/>
       break;
     default:
       output = <h1> 404 error</h1>;

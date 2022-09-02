@@ -97,7 +97,7 @@ const Navbar = ({setTrig}) => {
             </DrawerContent>
           </Drawer>
         </div>
-        <div className="hover">
+        <div className="hover" onClick={()=>handleClick("home")}>
           <HomeIcon />
         </div>
         <div>
@@ -109,12 +109,12 @@ const Navbar = ({setTrig}) => {
         <div className="hover">
           <AddTaskModal setTrig={setTrig} />
         </div>
-        <div className="hover">
+        <div className="hover" onClick={()=>handleClick("activity")}>
           <CheckCircleOutlineIcon />
         </div>
-        <div className="hover">
+        {/* <div className="hover">
           <NotificationsIcon />
-        </div>
+        </div> */}
 
         <div>
           <Menu>
@@ -158,9 +158,9 @@ const Navbar = ({setTrig}) => {
               <MenuItem
                 mt="1rem"
                 onClick={(e) => {
-                  handleClick("today");
+                  handleClick("home");
                 }}
-                className={activeTab === "today" ? "active" : ""}
+                className={activeTab === "home" ? "active" : ""}
               >
                 <MdToday fontSize={"1.4rem"} color="purple" />
                 <Text ml="1rem">Today</Text>
@@ -183,15 +183,7 @@ const Navbar = ({setTrig}) => {
                 <BsCheckCircle fontSize={"1.4rem"} color="green" />
                 <Text ml="1rem">Completed</Text>
               </MenuItem>
-              <MenuItem
-                onClick={(e) => {
-                  handleClick("settings");
-                }}
-                className={activeTab === "settings" ? "active" : ""}
-              >
-                <AiOutlineSetting fontSize={"1.4rem"} color="#ff3c69" />
-                <Text ml="1rem">Settings</Text>
-              </MenuItem>
+              
               <MenuItem
                 onClick={(e) => {
                   localStorage.setItem("token", "");
