@@ -36,7 +36,7 @@ const TodoList = ({ todo, setTrig }) => {
                 color="#36454F"
               >
                 {el.title}{" "}
-                <sapan style={{ color: "teal" }}>({el.category})</sapan>
+                <span style={{ color: "teal" }}>({el.category})</span>
               </Checkbox>
               <Text fontSize="14px" color="grey">
                 {el.description}
