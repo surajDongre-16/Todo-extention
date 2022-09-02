@@ -11,7 +11,11 @@ import {
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
 
-const TodoList = ({ todo }) => {
+const TodoList = ({ todo, setTrig }) => {
+  const handleTrig = () => {
+    setTrig((prev) => !prev);
+  };
+
   return (
     <VStack>
       {todo?.map((el) => (
@@ -48,7 +52,7 @@ const TodoList = ({ todo }) => {
             >
               <DeleteIcon color="red.500" />
 
-              <Edit id={el._id} todo={el} />
+              <Edit todo={el} onClick={handleTrig} />
             </Flex>
           </Flex>
         </HStack>

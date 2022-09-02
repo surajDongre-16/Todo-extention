@@ -40,7 +40,7 @@ useEffect(()=>{
       Today
     </Text>
 
- <TodoList todo={todos}/>
+ <TodoList todo={todos} setTrig={setTrig}/>
 
   
  <Box height="70px" paddingTop={5}>
