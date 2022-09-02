@@ -58,6 +58,7 @@ const updateTodo=async(req,res,next)=>{
 
  const deleteTodo=async(req,res,next)=>{
     const id=req.params.id
+    console.log(id)
 
     let todo
     try{

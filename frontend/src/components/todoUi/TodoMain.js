@@ -4,7 +4,7 @@ import TodoList from './TodoList'
 import TodoAdd from './TodoAdd'
 import { useEffect } from 'react'
 import axios from "axios"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as action from "../../Redux/action"
 
 
@@ -24,11 +24,13 @@ const sendRequest = async()=>{
  return data
 }
 
+const todo=useSelector(store=>store.todo)
+
 
 useEffect(()=>{
  
-  sendRequest().then(data=>{setTodos(data.todos);dispatch(action.setTodo(data))})
-},[trig])
+  sendRequest().then(data=>{dispatch(action.setTodo(data.todos))})
+},[trig,dispatch])
 
 
 
@@ -44,7 +46,7 @@ useEffect(()=>{
     </Text>
 
 
- <TodoList todo={todos} setTrig={setTrig}/>
+ <TodoList todo={todo} setTrig={setTrig}/>
 
 
   

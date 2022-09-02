@@ -3,6 +3,8 @@ import "./App.css";
 import Signup from "./Pages/Signup";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
+import Completed from "./Pages/Completed";
+import Upcoming from "./Pages/Upcoming";
 
 function App() {
 	const curPage = useSelector((store) => store.currentPage);
@@ -19,6 +21,12 @@ function App() {
     case "login":
       output = <Login/>;
       break
+    case "completed":
+      output=<Completed/>
+      break;
+    case "upcoming":
+      output=<Upcoming/>
+      break;
     default:
       output = <h1> 404 error</h1>;
   }
