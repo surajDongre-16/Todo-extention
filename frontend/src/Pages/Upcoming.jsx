@@ -11,25 +11,25 @@ const Upcoming = () => {
 	const [trig, setTrig] = useState(false);
 	const id = JSON.parse(localStorage.getItem("user"))._id;
 
-	const sendRequest = async () => {
-		const res = await axios
-			.get(`http://localhost:5000/todo/user/${id}`)
-			.catch((err) => console.log(err));
-		const data = await res.data;
-		return data;
-	};
+	// const sendRequest = async () => {
+	// 	const res = await axios
+	// 		.get(`http://localhost:5000/todo/user/${id}`)
+	// 		.catch((err) => console.log(err));
+	// 	const data = await res.data;
+	// 	return data;
+	// };
 
 	const todo = useSelector((store) => store.todo);
 	const [upcominTasks, setupcomingTask] = useState(
 		todo.filter((ele) => {
-			let date = Number(ele.date.split("-")[2]);
+			let date = Number(ele.date.split("/")[2]);
 			return curDate <= date && !ele.status;
 		})
 	);
 
 	useEffect(()=>{
 		setupcomingTask(todo.filter((ele) => {
-			let date = Number(ele.date.split("-")[2]);
+			let date = Number(ele.date.split("/")[2]);
 			return curDate <= date && !ele.status;
 		}))
 	},[todo])

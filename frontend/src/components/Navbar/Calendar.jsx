@@ -41,11 +41,11 @@ const CalendarComp = ({ onClick }) => {
           <ModalCloseButton />
           <ModalBody>
             <Calendar
-              onChange={(event) =>{
-                handleDate(event)
-                onChange(event)
-                onClose()
-            }}
+              onChange={(event) => {
+                onChange(event);
+                handleDate(event);
+                onClose();
+              }}
               value={value}
             />
           </ModalBody>
