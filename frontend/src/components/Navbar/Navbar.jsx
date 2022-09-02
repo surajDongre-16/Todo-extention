@@ -50,7 +50,7 @@ const Navbar = () => {
 	return (
 		<div id="navbar">
 			<div>
-				<div>
+				<div className="hover">
 					<MenuIcon onClick={onOpen} />
 					<Drawer isOpen={isOpen} placement="left" onClose={onClose}>
 						<DrawerOverlay />
@@ -89,7 +89,7 @@ const Navbar = () => {
 						</DrawerContent>
 					</Drawer>
 				</div>
-				<div>
+				<div className="hover">
 					<HomeIcon />
 				</div>
 				<div>
@@ -98,13 +98,13 @@ const Navbar = () => {
 				</div>
 			</div>
 			<div>
-				<div>
+				<div className="hover">
 					<AddTaskModal/>
 				</div>
-				<div>
+				<div className="hover">
 					<CheckCircleOutlineIcon />
-				</div>
-				<div>
+				</div >
+				<div className="hover">
 					<NotificationsIcon />
 				</div>
 

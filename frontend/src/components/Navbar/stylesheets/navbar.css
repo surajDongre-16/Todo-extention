@@ -117,4 +117,6 @@
     background-color: rgb(234, 234, 234);
 }
 
-
+.hover:hover{
+    background-color: rgb(255, 117, 117);
+}
