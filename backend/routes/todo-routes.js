@@ -5,7 +5,8 @@ const todorouter=express.Router()
 
 
 todorouter.post("/add",addTodo)
+todorouter.get("/user/:id",getbyuserId)
 todorouter.put("/update/:id",updateTodo)
 todorouter.delete("/:id",deleteTodo)
-todorouter.get("/user/:id",getbyuserId)
+
 module.exports= todorouter
