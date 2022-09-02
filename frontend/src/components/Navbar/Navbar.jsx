@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./stylesheets/navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
-import AddIcon from "@mui/icons-material/Add";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -18,9 +17,7 @@ import {
 	DrawerHeader,
 	Box,
 	Flex,
-	Avatar,
 	Text,
-	Spacer,
 } from "@chakra-ui/react";
 
 import {

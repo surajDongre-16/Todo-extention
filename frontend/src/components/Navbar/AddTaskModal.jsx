@@ -3,7 +3,6 @@ import {
 	Modal,
 	ModalOverlay,
 	ModalContent,
-	ModalHeader,
 	ModalFooter,
 	ModalBody,
 	ModalCloseButton,
@@ -12,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import AddIcon from "@mui/icons-material/Add";
 import "./stylesheets/addtaskModal.css";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AddLabel from "./AddLabel";
 import AddTimer from "./AddTimer";
 import CalendarComp from "./Calendar";
