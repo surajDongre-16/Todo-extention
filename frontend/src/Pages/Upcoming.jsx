@@ -20,15 +20,18 @@ const Upcoming = () => {
 	};
 
 	const todo = useSelector((store) => store.todo);
-	const [upcominTasks, setupcomingTask] = useState(todo);
+	const [upcominTasks, setupcomingTask] = useState(
+		todo.filter((ele) => {
+			let date = Number(ele.date.split("-")[2]);
+			return curDate <= date && !ele.status;
+		})
+	);
 
-	useEffect(() => {
-		setupcomingTask(
-			todo.filter((ele) => {
-				let date = Number(ele.date.split("-")[2]);
-				console.log(date > curDate);
-				return curDate <= date;
-			}))
+	useEffect(()=>{
+		setupcomingTask(todo.filter((ele) => {
+			let date = Number(ele.date.split("-")[2]);
+			return curDate <= date && !ele.status;
+		}))
 	},[todo])
 
 	return (
@@ -38,12 +41,20 @@ const Upcoming = () => {
 				id="Activity"
 				style={{ width: "80%", margin: "auto", marginTop: "40px" }}
 			>
-				<h2 style={{ fontSize: "24px", fontWeight: "600" }}>Upcoming Tasks ({upcominTasks.length})</h2>
+				<h2 style={{ fontSize: "24px", fontWeight: "600" }}>
+					Upcoming Tasks ({upcominTasks.length})
+				</h2>
 				<br />
-				{upcominTasks.length && upcominTasks.length ?
-					upcominTasks.map((ele) => (
-						<TodoList key={ele._id} todo={upcominTasks} setTrig={setTrig} />
-					)):<p>There are no Upcoming Task assigned</p>}
+				{upcominTasks.length ? (
+					upcominTasks.map((ele, indx) => {
+						if (indx) {
+							return [];
+						}
+						return <TodoList key={ele._id} todo={upcominTasks} setTrig={setTrig} />;
+					})
+				) : (
+					<p>There are no Upcoming Task assigned</p>
+				)}
 			</div>
 		</>
 	);
