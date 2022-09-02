@@ -1,14 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Navbar from "../components/Navbar/Navbar";
 import TodoMain from "../components/todoUi/TodoMain";
 import ActivityList from "./ActivityList";
+import * as action from "../Redux/action"
 
 const Home = () => {
   const id = JSON.parse(localStorage.getItem("user"))._id;
   console.log(id);
   const [todos, setTodos] = useState();
   const [trig, setTrig] = useState(false);
+  const dispatch=useDispatch()
 
   const sendRequest = async () => {
     const res = await axios
@@ -19,7 +22,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    sendRequest().then((data) => setTodos(data.todos));
+    sendRequest().then((data) => {setTodos(data.todos);dispatch(action.setTodo(data.todos))});
   }, [trig]);
 
 //   useEffect(() => {
