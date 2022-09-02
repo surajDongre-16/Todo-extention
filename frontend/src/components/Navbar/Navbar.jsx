@@ -38,8 +38,13 @@ import { FiLogOut } from "react-icons/fi";
 import { MdToday } from "react-icons/md";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { BsCheckCircle } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import * as action from "../../Redux/action";
+
+
 
 const Navbar = () => {
+	  const dispatch = useDispatch();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [activeTab, setActiveTab] = useState("today");
 	const handleClick = (str) => {
@@ -171,7 +176,8 @@ const Navbar = () => {
 							</MenuItem>
 							<MenuItem
 								onClick={(e) => {
-									handleClick("login");
+									localStorage.setItem("token",null)
+									 dispatch(action.switch_page("login"));
 								}}
 							>
 								<FiLogOut fontSize={"1.4rem"} color="#a8bfb8" />
