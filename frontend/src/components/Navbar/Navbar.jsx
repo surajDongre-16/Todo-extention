@@ -54,7 +54,7 @@ const Navbar = () => {
 
 	const user=JSON.parse(localStorage.getItem("user"))
 	const initials=user.name.split(" ")
-	console.log(initials[initials.length-1][0],"user")
+	
 
 	return (
     <div id="navbar">
@@ -126,7 +126,7 @@ const Navbar = () => {
               height="28px"
               backgroundColor="white"
             >
-              {initials[initials.length - 1][0]}
+              {initials[0][0]}
               {initials[initials.length - 1][0]}
             </MenuButton>
             <MenuList>
@@ -142,7 +142,7 @@ const Navbar = () => {
                     alignItems={"center"}
                     justifyContent="center"
                   >
-                    {initials[initials.length - 1][0]}
+                    {initials[0][0]}
                     {initials[initials.length - 1][0]}
                   </Flex>
                   <Flex
