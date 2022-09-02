@@ -8,6 +8,7 @@ import {
 	MenuItem,
 	Button,
 	DrawerHeader,
+    useDisclosure,
 } from "@chakra-ui/react";
 
 const AddLabel = () => {
@@ -23,10 +24,8 @@ const AddLabel = () => {
 					<LabelIcon />
 				</MenuButton>
 				<MenuList>
-					<div style={{marginBottom:"10px",padding:"0px 20px"}}>
-						<input style={{paddingLeft:"20px",marginRight:"20px"}} type="text" placeholder="Add a label to the task" />
-                        <Button disabled={true} size="sm" colorScheme="red">Add Label</Button>
-					</div>
+					<MenuItem>+  Personal</MenuItem>
+                    <MenuItem>+  work</MenuItem>
 				</MenuList>
 			</Menu>
 		</>
