@@ -13,6 +13,16 @@ router.get(
   passport.authenticate("google", { scope: ["email", "profile"] })
 );
 
+// router.get(
+//   "/auth/google/callback",
+//   passport.authenticate("google", {
+//     successRedirect:"/",
+//     failureRedirect: "/user/login/failure",
+//     session: false,
+//   }),
+  
+// );
+
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
