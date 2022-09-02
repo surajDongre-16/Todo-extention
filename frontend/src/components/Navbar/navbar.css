@@ -1,0 +1,120 @@
+#navbar {
+	height: 40px;
+	background-color: rgb(255, 75, 75);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0px 30px;
+	padding-left: 24px;
+}
+
+#navbar > div {
+	display: flex;
+	align-items: center;
+	width: 49%;
+	gap: 10px;
+}
+
+#navbar > div:last-child {
+	justify-content: flex-end;
+}
+
+#navbar > div:last-child>div:last-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+    background-color: white;
+    border-radius: 50%;
+    font-weight: 600;
+    color: rgb(95, 1, 95);
+}
+
+#navbar .css-juj1x8{
+    min-width:28px;
+    padding:1px;
+}
+
+#navbar > div > div svg {
+	color: white;
+}
+
+#navbar > div > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3px;
+	border-radius: 3px;
+}
+
+#navbar > div:first-child > div:last-child {
+	position: relative;
+}
+
+#navbar > div:first-child > div:last-child svg{
+    position:absolute;
+    z-index: 4;
+    left: 8px;
+    top:6px;
+    font-size: 26px;
+    color: rgb(200, 200, 200)
+}
+
+
+#navbar input {
+	width: 100px;
+    padding-left: 40px;
+	height: 28px;
+	border-radius: 4px;
+	background-color: rgb(255, 117, 117);
+	outline: none;
+	border: none;
+	position: relative;
+	z-index: 3;
+}
+
+#navbar input[type="text"]:focus {
+    background-color: white;
+    width: 300px;
+}
+
+.css-9fgtzh {
+    margin-left: 10px;
+}
+
+#drawerChild>div{
+    display: flex;
+    height: 36px;
+    align-items: center;
+    border-radius: 4px;
+    gap: 16px;
+    margin-left: 10px;
+    padding-left: 12px;
+}
+
+#drawerChild svg{
+    margin-top: 3px;
+}
+
+.css-6e3h0h .css-79z5gx{
+    -webkit-padding-end: 10px;
+}
+
+#drawerChild>div:first-child svg{
+    color: rgb(26, 0, 128);
+}
+
+#drawerChild>div:nth-child(2) svg{
+    color: rgb(181, 19, 1);
+}
+
+#drawerChild>div:nth-child(3) svg{
+    color: green;
+}
+
+.active{
+    background-color: rgb(234, 234, 234);
+}
+
+
