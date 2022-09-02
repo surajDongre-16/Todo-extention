@@ -176,7 +176,8 @@ const Navbar = () => {
 							</MenuItem>
 							<MenuItem
 								onClick={(e) => {
-									localStorage.setItem("token",null)
+									localStorage.setItem("token","")
+									localStorage.setItem("id","");
 									 dispatch(action.switch_page("login"));
 								}}
 							>

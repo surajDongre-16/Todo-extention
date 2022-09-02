@@ -17,13 +17,14 @@ const Login = () => {
     });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:5000/user/login", data)
       .then((res) => {
-        localStorage.setItem("id",res.data.id)
+        delete res.data.existinguser.password;
+        // console.log(res, "data");
+        localStorage.setItem("user", JSON.stringify(res.data.existinguser));
         localStorage.setItem("token", res.data.token);
         dispatch(action.switch_page("home"));
       })

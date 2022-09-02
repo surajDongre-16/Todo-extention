@@ -41,7 +41,7 @@ const AddTaskModal = () => {
             ></textarea>
 
             <div>
-              <CalendarComp/>
+              {/* <CalendarComp/> */}
 
               <div>
                 <AddLabel />
