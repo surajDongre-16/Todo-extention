@@ -14,7 +14,7 @@ import CalendarComp from "../Navbar/Calendar";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
-const TodoAdd = () => {
+const TodoAdd = ({ setTrig }) => {
   const [data, setFormData] = useState({});
   const [date, setDate] = useState(null);
   const handleChange = (e) => {
@@ -33,14 +33,15 @@ const TodoAdd = () => {
       user: JSON.parse(localStorage.getItem("user"))._id,
     });
 
-    axios
+    await axios
       .post("http://localhost:5000/todo/add", data)
       .then((r) => console.log(r))
       .catch((e) => console.log(e));
 
+    setTrig((prev) => !prev);
     //  console.log(date.toISOString().split("T")[0]);
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <Stack
