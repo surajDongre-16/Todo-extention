@@ -1,10 +1,11 @@
 import { Flex, Select } from "@chakra-ui/react";
 import React from "react";
 import ActivityItem from "../components/Activity/ActivityItem";
+import "../components/Activity/ActivityItem.css"
 
 const ActivityList = () => {
 	return (
-		<div style={{width:"80%",margin:"auto",marginTop:"50px"}}>
+		<div id="Activity" style={{width:"80%",margin:"auto",marginTop:"50px"}}>
 			<Flex style={{justifyContent:"space-between"}}>
 				<h2 style={{fontSize:"24px",fontWeight:"600"}}>Activity</h2>
 				<Select w="160px">

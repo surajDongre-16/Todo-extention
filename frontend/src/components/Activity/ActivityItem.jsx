@@ -16,13 +16,13 @@ const ActivityItem = () => {
 							(Tag here)
 						</span>
 					</h4>
-					<p style={{ fontSize: "14px", overflow: "hidden" }}>
+					<p style={{ fontSize: "12px", overflow: "hidden" }}>
 						Description here{" "}
 					</p>
 				</div>
 			</div>
 			<div className="activityItem">
-				<div className={status ? "completed" : "pending"}>jk</div>
+				<div className={!status ? "completed" : "pending"}>jk</div>
 				<div style={{ marginLeft: "30px" }}>
 					<h4 style={{ fontSize: "18px", fontWeight: "600" }}>
 						Title here{" "}
@@ -30,7 +30,7 @@ const ActivityItem = () => {
 							(Tag here)
 						</span>
 					</h4>
-					<p style={{ fontSize: "14px", overflow: "hidden" }}>
+					<p style={{ fontSize: "12px", overflow: "hidden" }}>
 						Description here{" "}
 					</p>
 				</div>
