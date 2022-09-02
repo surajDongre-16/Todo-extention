@@ -23,7 +23,7 @@ const Login = () => {
     axios
       .post("http://localhost:5000/user/login", data)
       .then((res) => {
-        // console.log(res.data,"data");
+        localStorage.setItem("id",res.data.id)
         localStorage.setItem("token", res.data.token);
         dispatch(action.switch_page("home"));
       })
