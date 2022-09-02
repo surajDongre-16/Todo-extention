@@ -19,7 +19,7 @@ const Login = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log(data, "data");
-      dispatch(action.switch_page("login"));
+      dispatch(action.switch_page("home"));
     };
   return (
     <Box

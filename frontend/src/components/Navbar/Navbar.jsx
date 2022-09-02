@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./navbar.css";
+import "./stylesheets/navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,17 +7,13 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import TodayIcon from "@mui/icons-material/Today";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 
 import {
 	Menu,
 	MenuButton,
 	MenuList,
 	MenuItem,
-	MenuItemOption,
-	MenuGroup,
-	MenuOptionGroup,
-	MenuDivider,
 	Button,
 	DrawerHeader,
 } from "@chakra-ui/react";
@@ -29,6 +25,7 @@ import {
 	DrawerContent,
 	useDisclosure,
 } from "@chakra-ui/react";
+import AddTaskModal from "./AddTaskModal";
 
 const Navbar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,7 +50,7 @@ const Navbar = () => {
 									onClick={(e) => {
 										handleClick("today");
 									}}
-									className={activeTab == "today" ? "active" : ""}
+									className={activeTab === "today" ? "active" : ""}
 								>
 									<TodayIcon />
 									<p>Today</p>
@@ -62,7 +59,7 @@ const Navbar = () => {
 									onClick={(e) => {
 										handleClick("upcoming");
 									}}
-									className={activeTab == "upcoming" ? "active" : ""}
+									className={activeTab === "upcoming" ? "active" : ""}
 								>
 									<CalendarMonthIcon />
 									<p>Upcoming</p>
@@ -71,7 +68,7 @@ const Navbar = () => {
 									onClick={(e) => {
 										handleClick("completed");
 									}}
-									className={activeTab == "completed" ? "active" : ""}
+									className={activeTab === "completed" ? "active" : ""}
 								>
 									<CheckCircleOutlineIcon />
 									<p>Completed</p>
@@ -84,13 +81,13 @@ const Navbar = () => {
 					<HomeIcon />
 				</div>
 				<div>
-          <SearchIcon/>
+					<SearchIcon />
 					<input type="text" />
 				</div>
 			</div>
 			<div>
 				<div>
-					<AddIcon />
+					<AddTaskModal />
 				</div>
 				<div>
 					<CheckCircleOutlineIcon />
