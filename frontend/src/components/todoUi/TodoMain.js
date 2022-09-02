@@ -7,22 +7,22 @@ import axios from "axios"
 
 
 const TodoMain = () => {
-const user=JSON.parse(localStorage.getItem('user'));
-console.log(user)
-//  const [todos,setTodos] = useState()
-// const sendRequest = async()=>{
-//  const res= await axios
-//  .get(`http://localhost:5000/todo/${id}`)
-//  .catch(err=>console.log(err))
-//  const data =await res.data
-//  return data
-// }
+const id=JSON.parse(localStorage.getItem('user'))._id;
+console.log(id)
+ const [todos,setTodos] = useState()
+const sendRequest = async()=>{
+ const res= await axios
+ .get(`http://localhost:5000/todo/user/${id}`)
+ .catch(err=>console.log(err))
+ const data =await res.data
+ return data
+}
 
 
-// useEffect(()=>{
-
-//   sendRequest().then(data=>setTodos(data.Todos))
-// },[])
+useEffect(()=>{
+ 
+  sendRequest().then(data=>setTodos(data.todos))
+},[])
 
 
 
@@ -36,7 +36,10 @@ console.log(user)
       fontWeight="extrabold">
       Today
     </Text>
-   <TodoList/>
+
+ <TodoList todo={todos}/>
+
+  
  <Box height="70px" paddingTop={5}>
  <Button onClick={onToggle} bg="white" color="red" >+ Add task</Button>
       <Fade in={isOpen}>
