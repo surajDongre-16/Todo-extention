@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   HStack,
   VStack,
@@ -6,9 +6,8 @@ import {
   Flex,
   Checkbox,
   Box,
-  Label,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
 import axios from "axios";
 

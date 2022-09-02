@@ -1,27 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-	Modal,
-	ModalOverlay,
-	ModalContent,
-	ModalFooter,
-	ModalBody,
-	ModalCloseButton,
-	useDisclosure,
-	Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import AddIcon from "@mui/icons-material/Add";
 import "./stylesheets/addtaskModal.css";
 import AddLabel from "./AddLabel";
 import AddTimer from "./AddTimer";
 import CalendarComp from "./Calendar";
+import axios from "axios";
 
+const AddTaskModal = ({ setTrig }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [data, setFormData] = useState({});
+  const [date, setDate] = useState(null);
+  const [tag, setTag] = useState(null);
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    setFormData({
+      ...data,
+      [name]: value,
+    });
+  };
 
-const AddTaskModal = () => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleSubmit = async () => {
+    let newData = {
+      ...data,
+      date: date.toISOString().split("T")[0],
+      category: tag,
+      user: JSON.parse(localStorage.getItem("user"))._id,
+    };
+    await axios
+      .post("http://localhost:5000/todo/add", newData)
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e));
 
-  const [date,setDate]=React.useState(null)
+    setTrig((prev) => !prev);
+  };
 
-	return (
+  return (
     <>
       <AddIcon onClick={onOpen} />
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -31,20 +54,24 @@ const AddTaskModal = () => {
           <ModalBody id="addTodoModal">
             <input
               placeholder="Add todo for e.g.,Buy gift tommorow at 6pm"
+              name="title"
               type="text"
+              onChange={handleChange}
             />
             <textarea
               placeholder="Add a description to your todo"
               id="description"
               rows="4"
               cols="50"
+              name="description"
+              onChange={handleChange}
             ></textarea>
 
             <div>
-              <CalendarComp onClick={(value)=>setDate(value)}/>
+              <CalendarComp onClick={(value) => setDate(value)} />
 
               <div>
-                <AddLabel />
+                <AddLabel setTag={setTag} />
                 <AddTimer />
               </div>
             </div>
@@ -54,7 +81,14 @@ const AddTaskModal = () => {
             <Button size="sm" variant="ghost" mr={3} onClick={onClose}>
               Cancle
             </Button>
-            <Button size="sm" disabled={true} colorScheme="red">
+            <Button
+              size="sm"
+              colorScheme="red"
+              onClick={() => {
+                handleSubmit();
+                onClose();
+              }}
+            >
               Add task
             </Button>
           </ModalFooter>

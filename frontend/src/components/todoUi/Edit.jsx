@@ -14,24 +14,10 @@ import {
   PopoverCloseButton,
   IconButton,
   PopoverArrow,
-  PopoverAnchor,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
 
-// 1. Create a text input component
-// const TextInput = React.forwardRef(() => {
-//     return (
-//       <FormControl>
-//         <FormLabel>Task</FormLabel>
-//         <Input  />
-//         <FormLabel>Description</FormLabel>
-//         <Input  />
-//       </FormControl>
-//     )
-//   })
-
-// 2. Create the form
 const Form = ({ onCancel, todo, trig }) => {
   // console.log(todo,"formtodo")
   const [data, setFormData] = useState(null);
@@ -89,8 +75,7 @@ const Form = ({ onCancel, todo, trig }) => {
   );
 };
 
-// 3. Create the Popover
-// Ensure you set `closeOnBlur` prop to false so it doesn't close on outside click
+
 const Edit = ({ todo, onClick }) => {
   // console.log(id,"edit",todo)
   const { onOpen, onClose, isOpen } = useDisclosure();

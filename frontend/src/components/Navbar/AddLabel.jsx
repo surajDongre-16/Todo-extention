@@ -6,12 +6,9 @@ import {
 	MenuButton,
 	MenuList,
 	MenuItem,
-	Button,
-	DrawerHeader,
-    useDisclosure,
 } from "@chakra-ui/react";
 
-const AddLabel = () => {
+const AddLabel = ({setTag}) => {
 	return (
 		<>
 			<Menu>
@@ -24,8 +21,8 @@ const AddLabel = () => {
 					<LabelIcon />
 				</MenuButton>
 				<MenuList>
-					<MenuItem>+  Personal</MenuItem>
-                    <MenuItem>+  work</MenuItem>
+					<MenuItem onClick={()=>setTag("personal")} >+  Personal</MenuItem>
+                    <MenuItem onClick={()=>setTag("work")}>+  work</MenuItem>
 				</MenuList>
 			</Menu>
 		</>

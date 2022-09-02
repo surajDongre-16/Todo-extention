@@ -40,7 +40,7 @@ import * as action from "../../Redux/action";
 
 
 
-const Navbar = () => {
+const Navbar = ({setTrig}) => {
 	  const dispatch = useDispatch();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [activeTab, setActiveTab] = useState("today");
@@ -105,7 +105,7 @@ const Navbar = () => {
       </div>
       <div>
         <div className="hover">
-          <AddTaskModal />
+          <AddTaskModal setTrig={setTrig} />
         </div>
         <div className="hover">
           <CheckCircleOutlineIcon />
