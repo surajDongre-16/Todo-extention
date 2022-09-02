@@ -34,12 +34,12 @@ const Signup = () => {
   };
 
   const handleGoogle = () => {
-    axios
-      .get("http://localhost:5000/user/auth/google")
-      .then((res) => {
-        console.log(res, "google");
-        // dispatch(action.switch_page("home"));
-      })
+    fetch("http://localhost:5000/user/auth/google")
+    .then((res)=>console.log(res))  
+	// .then((res) => {
+    //     console.log(res, "google");
+    //     // dispatch(action.switch_page("home"));
+    //   })
       .catch((err) => console.log("Error during signup", err));
   };
 

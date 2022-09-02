@@ -27,7 +27,7 @@ const Login = () => {
         dispatch(action.switch_page("home"));
       })
       .catch((err) => console.log("Error during signup", err));
-    dispatch(action.switch_page("login"));
+    // dispatch(action.switch_page("login"));
   };
   return (
     <Box
