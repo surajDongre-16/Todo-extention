@@ -32,7 +32,9 @@ import axios from "axios";
 //   })
 
 // 2. Create the form
-const Form = ({ onCancel,todo }) => {
+
+const Form = ({ onCancel, todo, trig }) => {
+  // console.log(todo,"formtodo")
 
   const [data, setFormData] = useState(null);
   const handleChange = (e) => {
@@ -43,30 +45,45 @@ const Form = ({ onCancel,todo }) => {
     });
   };
 
-  const handleSubmit=()=>{
+  const handleSubmit = async () => {
     // console.log(data)
-    for(let key in data){
-      if(!data[key]){
-        delete data[key]
+    for (let key in data) {
+      if (!data[key]) {
+        delete data[key];
       }
     }
-    console.log(data)
-    axios.put("http://localhost:5000/todo/user")
-  }
+    // console.log(todo._id, "id");
+    await axios
+      .put(`http://localhost:5000/todo/update/${todo._id}`, data)
+      .then((r) => {
+        trig();
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <Stack spacing={4}>
       <FormControl>
         <FormLabel>Task</FormLabel>
-        <Input name="title" onChange={handleChange} />
+        <Input name="title" placeholder={todo.title} onChange={handleChange} />
         <FormLabel>Description</FormLabel>
-        <Input name="description" onChange={handleChange} />
+        <Input
+          name="description"
+          placeholder={todo.description}
+          onChange={handleChange}
+        />
       </FormControl>
       <ButtonGroup display="flex" justifyContent="flex-end">
         <Button variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button colorScheme="red" onClick={handleSubmit}>
+        <Button
+          colorScheme="red"
+          onClick={() => {
+            handleSubmit();
+            onCancel();
+          }}
+        >
           Save
         </Button>
       </ButtonGroup>
@@ -76,10 +93,14 @@ const Form = ({ onCancel,todo }) => {
 
 // 3. Create the Popover
 // Ensure you set `closeOnBlur` prop to false so it doesn't close on outside click
-const Edit = ({id,title ,description}) => {
+
+const Edit = ({ todo, onClick }) => {
+
   // console.log(id,"edit",todo)
   const { onOpen, onClose, isOpen } = useDisclosure();
-
+  const trig = () => {
+    onClick();
+  };
   return (
     <>
       <Popover
@@ -96,7 +117,7 @@ const Edit = ({id,title ,description}) => {
           <FocusLock returnFocus persistentFocus={false}>
             <PopoverArrow />
             <PopoverCloseButton />
-            <Form onCancel={onClose} id={id} />
+            <Form onCancel={onClose} todo={todo} trig={trig} />
           </FocusLock>
         </PopoverContent>
       </Popover>

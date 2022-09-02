@@ -43,10 +43,8 @@ useEffect(()=>{
       Today
     </Text>
 
-  <TodoList todo={todos} />
 
- 
-
+ <TodoList todo={todos} setTrig={setTrig}/>
 
 
   

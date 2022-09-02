@@ -21,6 +21,8 @@ import CalendarComp from "./Calendar";
 const AddTaskModal = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [date,setDate]=React.useState(null)
+
 	return (
     <>
       <AddIcon onClick={onOpen} />
@@ -41,7 +43,7 @@ const AddTaskModal = () => {
             ></textarea>
 
             <div>
-              {/* <CalendarComp/> */}
+              <CalendarComp onClick={(value)=>setDate(value)}/>
 
               <div>
                 <AddLabel />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   HStack,
   VStack,
@@ -12,14 +12,27 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
 import axios from "axios";
 
-const TodoList = ({todo }) => {
 
-// const handleDelete=()=>{
-//   console.log(id)
-//   axios.delete(`http//localhost:5000/todo/${id}`).then((res)=>console.log(res))
-//  .catch((err)=>console.log(err))
-// }
+const TodoList = ({ todo, setTrig }) => {
 
+  const handleTrig = () => {
+    setTrig((prev) => !prev);
+  };
+  // console.log(todo, "cehcked");
+  const handleCheckBox = async (e) => {
+      let newData={
+        ...e,
+        status:!e.status
+      }
+      // console.log(newData)
+      await axios
+        .put(`http://localhost:5000/todo/update/${e._id}`, newData)
+        .then((r) => {
+          // console.log(r)
+          handleTrig()
+        })
+        .catch((e) => console.log(e));
+  };
 
   return (
     <VStack>
@@ -33,15 +46,17 @@ const TodoList = ({todo }) => {
           <Flex p={3} w="400px" justifyContent="space-around">
             <Box h="auto">
               <Checkbox
+                isChecked={el.status}
                 size="sm"
                 colorScheme="green"
                 mt="-4px"
                 border="grey"
                 fontWeight="bold"
                 color="#36454F"
+                onChange={(e) => handleCheckBox(el)}
               >
                 {el.title}{" "}
-                <sapan style={{ color: "teal" }}>({el.category})</sapan>
+                <span style={{ color: "teal" }}>({el.category})</span>
               </Checkbox>
               <Text fontSize="14px" color="grey">
                 {el.description}
@@ -57,7 +72,7 @@ const TodoList = ({todo }) => {
             >
               <DeleteIcon color="red.500"   />
 
-              <Edit id={el._id} todo={el} />
+              <Edit todo={el} onClick={handleTrig} />
             </Flex>
           </Flex>
         </HStack>
