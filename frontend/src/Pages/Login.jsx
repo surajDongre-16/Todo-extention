@@ -1,33 +1,41 @@
-import { Box, Button, Heading, Input, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { FcGoogle } from 'react-icons/fc';
-import { useDispatch} from 'react-redux';
+import { Box, Button, Heading, Input, Text } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { useDispatch } from "react-redux";
 import * as action from "../Redux/action";
 const Login = () => {
-    // const curPage = useSelector((store) => store.currentPage);
-    const [data, setFormData] = useState({});
-    //   console.log(curPage);
-    const dispatch = useDispatch();
-    const handleChange = (e) => {
-      let { name, value } = e.target;
-      setFormData({
-        ...data,
-        [name]: value,
-      });
-    };
+  // const curPage = useSelector((store) => store.currentPage);
+  const [data, setFormData] = useState({});
+  //   console.log(curPage);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    setFormData({
+      ...data,
+      [name]: value,
+    });
+  };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(data, "data");
-      dispatch(action.switch_page("login"));
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/user/login", data)
+      .then((res) => {
+        // console.log(res.data,"data");
+        localStorage.setItem("token", res.data.token);
+        dispatch(action.switch_page("home"));
+      })
+      .catch((err) => console.log("Error during signup", err));
+    dispatch(action.switch_page("login"));
+  };
   return (
     <Box
       display={"flex"}
       flexDirection="column"
       h="25rem"
       justifyContent={"space-around"}
-      mt='5rem'
+      mt="5rem"
     >
       <Heading as="h3" size="lg" textAlign={"center"} color="blue.400">
         Login
@@ -70,8 +78,22 @@ const Login = () => {
           cursor={"pointer"}
         />
       </form>
+      <Box>
+        <Text display={"flex"} justifyContent="center">
+          If you are a new to app then
+          <Text
+            ml="0.5rem"
+            color="blue.500"
+            textDecor={"underline"}
+            cursor="pointer"
+            onClick={() => dispatch(action.switch_page("signup"))}
+          >
+            Signup here
+          </Text>
+        </Text>
+      </Box>
     </Box>
   );
-}
+};
 
-export default Login
+export default Login;
