@@ -61,7 +61,9 @@ existinguser=await User.findOne({email})
             name:existinguser.name,
            id:existinguser._id
           },"SECRET")
-    return res.status(200).json({message:"Login sucessful",token:token,id:existinguser.id})  
+    return res
+      .status(200)
+      .json({ message: "Login sucessful", token: token, existinguser });  
 }
 
 module.exports= {getAllUser,signup,login}

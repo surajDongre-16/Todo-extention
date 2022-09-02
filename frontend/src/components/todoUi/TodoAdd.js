@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Stack,
   Input,
@@ -11,10 +11,38 @@ import {
 
 import { CalendarIcon } from "@chakra-ui/icons";
 import CalendarComp from "../Navbar/Calendar";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const TodoAdd = () => {
+  const [data, setFormData] = useState({});
+  const [date, setDate] = useState(null);
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    setFormData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await setFormData({
+      ...data,
+      date: date.toISOString().split("T")[0],
+      user: JSON.parse(localStorage.getItem("user"))._id,
+    });
+
+    axios
+      .post("http://localhost:5000/todo/add", data)
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e));
+
+    //  console.log(date.toISOString().split("T")[0]);
+  };
+  
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Stack
         w="400px"
         boxShadow=" rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px"
@@ -27,7 +55,9 @@ const TodoAdd = () => {
           focusBorderColor="none"
           _placeholder={{ color: "teal", fontWeight: "bold" }}
           type="text"
+          name="title"
           placeholder="Todo"
+          onChange={handleChange}
         />
         <Input
           border="none"
@@ -35,21 +65,29 @@ const TodoAdd = () => {
           focusBorderColor="none"
           _placeholder={{ color: "purple", fontWeight: "bold" }}
           type="text"
+          name="description"
           placeholder="Description"
+          onChange={handleChange}
         />
         <Flex mt="2">
-          <Select w="120px" h="2.5rem">
+          <Select
+            w="120px"
+            h="2.5rem"
+            name="category"
+            type="text"
+            onChange={handleChange}
+          >
             <option>select</option>
             <option value="personal">personal</option>
             <option value="work">work</option>
           </Select>
           {/* <CalendarIcon mt={1} ml="3"/> */}
-          <Box ml='1rem' >
-            <CalendarComp />
+          <Box ml="1rem">
+            <CalendarComp onClick={(value) => setDate(value)} />
           </Box>
           <Spacer />
           <Box pr="4">
-            <Button colorScheme="red" size="md">
+            <Button colorScheme="red" size="md" type="submit">
               Add
             </Button>
           </Box>

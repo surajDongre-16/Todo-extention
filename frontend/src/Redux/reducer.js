@@ -1,7 +1,9 @@
 import * as actionType from "./actionType";
 
+const data=localStorage.getItem("user") || null
+
 const initialState = {
-	currentPage: "signup"
+	currentPage: data ? "home" : "signup"
 };
 
 export const reducer = (state = initialState, action) => {
