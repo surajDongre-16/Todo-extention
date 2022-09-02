@@ -26,13 +26,15 @@ const TodoAdd = ({ setTrig }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    // console.log(date.toLocaleDateString());
+    // console.log(date.toISOString().split("T")[0], "date");
+    // console.log(date)
     let newData = {
       ...data,
-      date: date.toISOString().split("T")[0],
+      date: date.toLocaleDateString(),
       user: JSON.parse(localStorage.getItem("user"))._id,
     };
-
+    
     await axios
       .post("http://localhost:5000/todo/add", newData)
       .then((r) => console.log(r))
