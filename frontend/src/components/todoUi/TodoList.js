@@ -12,6 +12,7 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
 import axios from "axios";
 
+
 const TodoList = ({ todo, setTrig }) => {
 
   const handleTrig = () => {
@@ -32,9 +33,10 @@ const TodoList = ({ todo, setTrig }) => {
         })
         .catch((e) => console.log(e));
   };
+
   return (
     <VStack>
-      {todo?.map((el) => (
+    {todo?.map((el)=>(
         <HStack
           w="400px"
           h="auto"
@@ -68,13 +70,13 @@ const TodoList = ({ todo, setTrig }) => {
               gap={5}
               ml="auto"
             >
-              <DeleteIcon color="red.500" />
+              <DeleteIcon color="red.500"   />
 
               <Edit todo={el} onClick={handleTrig} />
             </Flex>
           </Flex>
         </HStack>
-      ))}
+ ))}
     </VStack>
   );
 };
