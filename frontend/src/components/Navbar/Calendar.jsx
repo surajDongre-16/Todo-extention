@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Calendar from "react-calendar";
@@ -8,9 +8,9 @@ const CalendarComp = () => {
     const [value, onChange] = useState(new Date());
   return (
     <>
-      <Button onClick={onOpen}>
-        <CalendarMonthIcon />
-        Today
+      <Button onClick={onOpen} bg='blue.500' colorScheme={'blue'} color='white' >
+        <CalendarMonthIcon/>
+        <Text ml='0.5rem' >Today</Text>
       </Button>
 
       <Modal
