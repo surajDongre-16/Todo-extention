@@ -10,6 +10,9 @@ const TodoMain = () => {
 const id=JSON.parse(localStorage.getItem('user'))._id;
 console.log(id)
  const [todos,setTodos] = useState()
+const [trig,setTrig]=useState(false)
+
+
 const sendRequest = async()=>{
  const res= await axios
  .get(`http://localhost:5000/todo/user/${id}`)
@@ -22,7 +25,7 @@ const sendRequest = async()=>{
 useEffect(()=>{
  
   sendRequest().then(data=>setTodos(data.todos))
-},[])
+},[trig])
 
 
 
@@ -43,7 +46,7 @@ useEffect(()=>{
  <Box height="70px" paddingTop={5}>
  <Button onClick={onToggle} bg="white" color="red" >+ Add task</Button>
       <Fade in={isOpen}>
-      <TodoAdd/>
+      <TodoAdd setTrig={setTrig} />
       </Fade>
  </Box>
   

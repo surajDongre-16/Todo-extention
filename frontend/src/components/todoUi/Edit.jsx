@@ -76,7 +76,8 @@ const Form = ({ onCancel,id }) => {
 
 // 3. Create the Popover
 // Ensure you set `closeOnBlur` prop to false so it doesn't close on outside click
-const Edit = ({id}) => {
+const Edit = ({id,todo}) => {
+  // console.log(id,"edit",todo)
   const { onOpen, onClose, isOpen } = useDisclosure();
 
   return (
