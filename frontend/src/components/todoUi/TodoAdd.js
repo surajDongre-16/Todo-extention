@@ -27,14 +27,22 @@ const TodoAdd = ({ setTrig }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await setFormData({
+   
+    // setFormData({
+    //   ...data,
+    //   date: date.toISOString().split("T")[0],
+    //   user: JSON.parse(localStorage.getItem("user"))._id,
+    // });
+    let newData = {
       ...data,
       date: date.toISOString().split("T")[0],
       user: JSON.parse(localStorage.getItem("user"))._id,
-    });
+    };
+   
 
+    // console.log(newData,"formdata")
     await axios
-      .post("http://localhost:5000/todo/add", data)
+      .post("http://localhost:5000/todo/add", newData)
       .then((r) => console.log(r))
       .catch((e) => console.log(e));
 
@@ -99,3 +107,4 @@ const TodoAdd = ({ setTrig }) => {
 };
 
 export default TodoAdd;
+

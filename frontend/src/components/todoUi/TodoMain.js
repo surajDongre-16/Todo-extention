@@ -25,7 +25,7 @@ const sendRequest = async()=>{
 useEffect(()=>{
  
   sendRequest().then(data=>setTodos(data.todos))
-},[])
+},[trig])
 
 
 
