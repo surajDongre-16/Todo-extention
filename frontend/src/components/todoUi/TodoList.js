@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   HStack,
   VStack,
@@ -10,12 +10,28 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
+import axios from "axios";
 
 const TodoList = ({ todo, setTrig }) => {
+
   const handleTrig = () => {
     setTrig((prev) => !prev);
   };
-
+  // console.log(todo, "cehcked");
+  const handleCheckBox = async (e) => {
+      let newData={
+        ...e,
+        status:!e.status
+      }
+      // console.log(newData)
+      await axios
+        .put(`http://localhost:5000/todo/update/${e._id}`, newData)
+        .then((r) => {
+          // console.log(r)
+          handleTrig()
+        })
+        .catch((e) => console.log(e));
+  };
   return (
     <VStack>
       {todo?.map((el) => (
@@ -28,15 +44,17 @@ const TodoList = ({ todo, setTrig }) => {
           <Flex p={3} w="400px" justifyContent="space-around">
             <Box h="auto">
               <Checkbox
+                isChecked={el.status}
                 size="sm"
                 colorScheme="green"
                 mt="-4px"
                 border="grey"
                 fontWeight="bold"
                 color="#36454F"
+                onChange={(e) => handleCheckBox(el)}
               >
                 {el.title}{" "}
-                <sapan style={{ color: "teal" }}>({el.category})</sapan>
+                <span style={{ color: "teal" }}>({el.category})</span>
               </Checkbox>
               <Text fontSize="14px" color="grey">
                 {el.description}
