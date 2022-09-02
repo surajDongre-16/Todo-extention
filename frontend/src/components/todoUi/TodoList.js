@@ -11,6 +11,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
 import axios from "axios";
 
+
 const TodoList = ({ todo, setTrig }) => {
 
   const handleTrig = () => {
@@ -18,6 +19,8 @@ const TodoList = ({ todo, setTrig }) => {
   };
   // console.log(todo, "cehcked");
   const handleCheckBox = async (e) => {
+   
+
       let newData={
         ...e,
         status:!e.status
@@ -29,11 +32,22 @@ const TodoList = ({ todo, setTrig }) => {
           // console.log(r)
           handleTrig()
         })
+      
         .catch((e) => console.log(e));
   };
+
+  const handleDelete= async(e)=>{
+    await axios.delete(`http://localhost:5000/todo/${e._id}`).then((r)=>  handleTrig())
+    .catch((e) => console.log(e));
+
+  }
+
   return (
     <VStack>
-      {todo?.map((el) => (
+    {todo?.map((el)=>(
+      <>
+      {!el.status ?
+        <>
         <HStack
           w="400px"
           h="auto"
@@ -44,7 +58,7 @@ const TodoList = ({ todo, setTrig }) => {
             <Box h="auto">
               <Checkbox
                 isChecked={el.status}
-                size="sm"
+                size="md"
                 colorScheme="green"
                 mt="-4px"
                 border="grey"
@@ -67,13 +81,15 @@ const TodoList = ({ todo, setTrig }) => {
               gap={5}
               ml="auto"
             >
-              <DeleteIcon color="red.500" />
+              <DeleteIcon color="red.500"      onClick={(e)=> handleDelete(el)} />
 
               <Edit todo={el} onClick={handleTrig} />
             </Flex>
           </Flex>
-        </HStack>
-      ))}
+        </HStack> 
+        </>
+        : ""}</>
+ ))}
     </VStack>
   );
 };

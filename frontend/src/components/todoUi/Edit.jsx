@@ -20,6 +20,7 @@ import axios from "axios";
 
 const Form = ({ onCancel, todo, trig }) => {
   // console.log(todo,"formtodo")
+
   const [data, setFormData] = useState(null);
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -75,8 +76,8 @@ const Form = ({ onCancel, todo, trig }) => {
   );
 };
 
-
 const Edit = ({ todo, onClick }) => {
+
   // console.log(id,"edit",todo)
   const { onOpen, onClose, isOpen } = useDisclosure();
   const trig = () => {
