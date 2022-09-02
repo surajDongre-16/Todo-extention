@@ -41,8 +41,9 @@ const ActivityList = () => {
 				let curDate = today.getDate();
 				setRender(
 					todo.filter((ele) => {
-						let date = Number(ele.date.split("-")[2]);
-						return date + 1 == curDate;
+						let date = Number(ele.date.split("/")[1]);
+						console.log(date)
+						return date == curDate;
 					})
 				);
 				break;
@@ -52,8 +53,9 @@ const ActivityList = () => {
 				let curDate = today.getDate();
 				setRender(
 					todo.filter((ele) => {
-						let date = Number(ele.date.split("-")[2]);
-						return date >= curDate;
+						let date = Number(ele.date.split("/")[1]);
+						console.log(date)
+						return date > curDate;
 					})
 				);
 				break;
