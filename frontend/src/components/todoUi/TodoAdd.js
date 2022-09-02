@@ -9,9 +9,8 @@ import {
   Select,
 } from "@chakra-ui/react";
 
-import { CalendarIcon } from "@chakra-ui/icons";
 import CalendarComp from "../Navbar/Calendar";
-import { useDispatch } from "react-redux";
+
 import axios from "axios";
 
 const TodoAdd = ({ setTrig }) => {
@@ -27,27 +26,19 @@ const TodoAdd = ({ setTrig }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-    // setFormData({
-    //   ...data,
-    //   date: date.toISOString().split("T")[0],
-    //   user: JSON.parse(localStorage.getItem("user"))._id,
-    // });
+  
     let newData = {
       ...data,
       date: date.toISOString().split("T")[0],
       user: JSON.parse(localStorage.getItem("user"))._id,
     };
-   
 
-    // console.log(newData,"formdata")
     await axios
       .post("http://localhost:5000/todo/add", newData)
       .then((r) => console.log(r))
       .catch((e) => console.log(e));
 
     setTrig((prev) => !prev);
-    //  console.log(date.toISOString().split("T")[0]);
   };
 
   return (
@@ -90,7 +81,6 @@ const TodoAdd = ({ setTrig }) => {
             <option value="personal">personal</option>
             <option value="work">work</option>
           </Select>
-          {/* <CalendarIcon mt={1} ml="3"/> */}
           <Box ml="1rem">
             <CalendarComp onClick={(value) => setDate(value)} />
           </Box>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   HStack,
   VStack,
@@ -6,9 +6,8 @@ import {
   Flex,
   Checkbox,
   Box,
-  Label,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
 import axios from "axios";
 
@@ -20,6 +19,8 @@ const TodoList = ({ todo, setTrig }) => {
   };
   // console.log(todo, "cehcked");
   const handleCheckBox = async (e) => {
+   
+
       let newData={
         ...e,
         status:!e.status
@@ -31,6 +32,7 @@ const TodoList = ({ todo, setTrig }) => {
           // console.log(r)
           handleTrig()
         })
+      
         .catch((e) => console.log(e));
   };
 
@@ -43,6 +45,9 @@ const TodoList = ({ todo, setTrig }) => {
   return (
     <VStack>
     {todo?.map((el)=>(
+      <>
+      {!el.status ?
+        <>
         <HStack
           w="400px"
           h="auto"
@@ -53,7 +58,7 @@ const TodoList = ({ todo, setTrig }) => {
             <Box h="auto">
               <Checkbox
                 isChecked={el.status}
-                size="sm"
+                size="md"
                 colorScheme="green"
                 mt="-4px"
                 border="grey"
@@ -81,7 +86,9 @@ const TodoList = ({ todo, setTrig }) => {
               <Edit todo={el} onClick={handleTrig} />
             </Flex>
           </Flex>
-        </HStack>
+        </HStack> 
+        </>
+        : ""}</>
  ))}
     </VStack>
   );
