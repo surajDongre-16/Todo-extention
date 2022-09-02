@@ -1,11 +1,13 @@
-import { Box, Button, Heading, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Input, Link, Text } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+
 import * as action from "../Redux/action";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 const Signup = () => {
-//   const curPage = useSelector((store) => store.currentPage);
+  //   const curPage = useSelector((store) => store.currentPage);
   const [data, setFormData] = useState({});
   //   console.log(curPage);
   const dispatch = useDispatch();
@@ -21,8 +23,26 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data, "data");
-	dispatch(action.switch_page("login"))
+    axios
+      .post("http://localhost:5000/user/signup", data)
+      .then((res) => {
+        // console.log(res);
+
+        dispatch(action.switch_page("login"));
+      })
+      .catch((err) => console.log("Error during signup", err));
   };
+
+  const handleGoogle = () => {
+    axios
+      .get("http://localhost:5000/user/auth/google")
+      .then((res) => {
+        console.log(res, "google");
+        // dispatch(action.switch_page("home"));
+      })
+      .catch((err) => console.log("Error during signup", err));
+  };
+
   return (
     <>
       {/* <div
@@ -37,13 +57,13 @@ const Signup = () => {
         display={"flex"}
         flexDirection="column"
         h="25rem"
-		mt='5rem'
+        mt="5rem"
         justifyContent={"space-around"}
       >
-        <Heading as="h3" size="lg" textAlign={'center'} color='blue.400' >
+        <Heading as="h3" size="lg" textAlign={"center"} color="blue.400">
           Signup
         </Heading>
-        <Button w="26rem" m="auto" colorScheme={"gray"}>
+        <Button w="26rem" m="auto" colorScheme={"gray"} onClick={handleGoogle}>
           <Box
             display={"flex"}
             w="12rem"
@@ -89,6 +109,20 @@ const Signup = () => {
             cursor={"pointer"}
           />
         </form>
+        <Box>
+          <Text display={"flex"} justifyContent="center">
+            If you are already an user{" "}
+            <Text
+              ml="0.5rem"
+              color="blue.500"
+              textDecor={"underline"}
+              cursor="pointer"
+			  onClick={()=>dispatch(action.switch_page("login"))}
+            >
+              Login here
+            </Text>
+          </Text>
+        </Box>
       </Box>
     </>
   );
