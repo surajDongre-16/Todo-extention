@@ -17,6 +17,7 @@ const Login = () => {
     });
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -29,6 +30,7 @@ const Login = () => {
       .catch((err) => console.log("Error during signup", err));
     // dispatch(action.switch_page("login"));
   };
+
   return (
     <Box
       display={"flex"}
