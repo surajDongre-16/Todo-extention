@@ -32,7 +32,7 @@ import axios from "axios";
 //   })
 
 // 2. Create the form
-const Form = ({ onCancel,id }) => {
+const Form = ({ onCancel,todo }) => {
 
   const [data, setFormData] = useState(null);
   const handleChange = (e) => {
@@ -76,7 +76,7 @@ const Form = ({ onCancel,id }) => {
 
 // 3. Create the Popover
 // Ensure you set `closeOnBlur` prop to false so it doesn't close on outside click
-const Edit = ({id,todo}) => {
+const Edit = ({id,title ,description}) => {
   // console.log(id,"edit",todo)
   const { onOpen, onClose, isOpen } = useDisclosure();
 

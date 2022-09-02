@@ -4,13 +4,16 @@ import TodoList from './TodoList'
 import TodoAdd from './TodoAdd'
 import { useEffect } from 'react'
 import axios from "axios"
+import { useDispatch } from 'react-redux'
+import * as action from "../../Redux/action"
 
 
 const TodoMain = () => {
 const id=JSON.parse(localStorage.getItem('user'))._id;
-console.log(id)
+
  const [todos,setTodos] = useState()
 const [trig,setTrig]=useState(false)
+const dispatch=useDispatch()
 
 
 const sendRequest = async()=>{
@@ -24,7 +27,7 @@ const sendRequest = async()=>{
 
 useEffect(()=>{
  
-  sendRequest().then(data=>setTodos(data.todos))
+  sendRequest().then(data=>{setTodos(data.todos);dispatch(action.setTodo(data))})
 },[trig])
 
 
@@ -40,7 +43,11 @@ useEffect(()=>{
       Today
     </Text>
 
- <TodoList todo={todos}/>
+  <TodoList todo={todos} />
+
+ 
+
+
 
   
  <Box height="70px" paddingTop={5}>

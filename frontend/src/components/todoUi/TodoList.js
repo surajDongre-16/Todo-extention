@@ -10,11 +10,20 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import Edit from "./Edit";
+import axios from "axios";
 
-const TodoList = ({ todo }) => {
+const TodoList = ({todo }) => {
+
+// const handleDelete=()=>{
+//   console.log(id)
+//   axios.delete(`http//localhost:5000/todo/${id}`).then((res)=>console.log(res))
+//  .catch((err)=>console.log(err))
+// }
+
+
   return (
     <VStack>
-      {todo?.map((el) => (
+    {todo?.map((el)=>(
         <HStack
           w="400px"
           h="auto"
@@ -46,13 +55,13 @@ const TodoList = ({ todo }) => {
               gap={5}
               ml="auto"
             >
-              <DeleteIcon color="red.500" />
+              <DeleteIcon color="red.500"   />
 
               <Edit id={el._id} todo={el} />
             </Flex>
           </Flex>
         </HStack>
-      ))}
+ ))}
     </VStack>
   );
 };
