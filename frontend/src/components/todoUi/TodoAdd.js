@@ -7,6 +7,7 @@ import {
   Flex,
   Box,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 
 import CalendarComp from "../Navbar/Calendar";
@@ -14,7 +15,8 @@ import CalendarComp from "../Navbar/Calendar";
 import axios from "axios";
 
 const TodoAdd = ({ setTrig }) => {
-  const [data, setFormData] = useState({});
+  const toast = useToast();
+  const [data, setFormData] = useState({ title: "", description: "" });
   const [date, setDate] = useState(null);
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -26,21 +28,38 @@ const TodoAdd = ({ setTrig }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(date.toLocaleDateString());
-    // console.log(date.toISOString().split("T")[0], "date");
-    // console.log(date)
-    let newData = {
-      ...data,
-      date: date.toLocaleDateString(),
-      user: JSON.parse(localStorage.getItem("user"))._id,
-    };
-    
-    await axios
-      .post("http://localhost:5000/todo/add", newData)
-      .then((r) => console.log(r))
-      .catch((e) => console.log(e));
+    if (date === null) {
+      toast({
+        title: "Please Select Date",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    } else {
+      let newData = {
+        ...data,
+        date: date.toLocaleDateString(),
+        user: JSON.parse(localStorage.getItem("user"))._id,
+      };
 
-    setTrig((prev) => !prev);
+      await axios
+        .post("http://localhost:5000/todo/add", newData)
+        .then((r) =>
+          toast({
+            title: "Your Task is added",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          })
+        )
+        .catch((e) => console.log(e));
+
+      setTrig((prev) => !prev);
+      setFormData({
+        title: "",
+        description: "",
+      });
+    }
   };
 
   return (
@@ -60,6 +79,7 @@ const TodoAdd = ({ setTrig }) => {
           name="title"
           placeholder="Todo"
           onChange={handleChange}
+          value={data.title}
         />
         <Input
           border="none"
@@ -70,6 +90,7 @@ const TodoAdd = ({ setTrig }) => {
           name="description"
           placeholder="Description"
           onChange={handleChange}
+          value={data.description}
         />
         <Flex mt="2">
           <Select
@@ -99,4 +120,3 @@ const TodoAdd = ({ setTrig }) => {
 };
 
 export default TodoAdd;
-
