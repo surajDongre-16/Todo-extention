@@ -11,7 +11,7 @@ const ActivityList = () => {
 	const todo = useSelector((store) => store.todo);
 	const [render, setRender] = useState(todo);
 	const [sort, setSort] = useState("completed");
-	console.log(sort);
+
 	const handleChange = (e) => {
 		setSort(e.target.value);
 	};
@@ -42,7 +42,6 @@ const ActivityList = () => {
 				setRender(
 					todo.filter((ele) => {
 						let date = Number(ele.date.split("/")[1]);
-						console.log(date)
 						return date == curDate;
 					})
 				);
@@ -54,7 +53,6 @@ const ActivityList = () => {
 				setRender(
 					todo.filter((ele) => {
 						let date = Number(ele.date.split("/")[1]);
-						console.log(date)
 						return date > curDate;
 					})
 				);
@@ -62,6 +60,7 @@ const ActivityList = () => {
 			default:
 				break;
 		}
+		
 	}, [sort]);
 
 	return (
