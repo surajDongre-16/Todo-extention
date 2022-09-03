@@ -62,7 +62,7 @@ const Home = () => {
 				setTodos(
 					todo.filter((ele) => {
 						let date = Number(ele.date.split("/")[1]);
-						return date == curDate;
+						return (date == curDate && ele.status===false);
 					})
 				);
   },[todo])

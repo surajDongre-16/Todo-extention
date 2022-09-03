@@ -120,6 +120,7 @@ const ActivityList = () => {
 				{render.length ? (
 					render.map((ele) => (
 						<ActivityItem
+							key={ele._id}
 							task={ele}
 							status={ele.status}
 							handleDelete={handleDelete}
