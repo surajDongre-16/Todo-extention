@@ -20,7 +20,7 @@ const Login = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		axios
-			.post("http://localhost:5000/user/login", data)
+			.post("https://calm-springs-45611.herokuapp.com/user/login", data)
 			.then((res) => {
 				delete res.data.existinguser.password;
 				// console.log(res, "data");
