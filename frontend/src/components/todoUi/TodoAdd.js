@@ -43,7 +43,7 @@ const TodoAdd = ({ setTrig }) => {
       };
 
       await axios
-        .post("http://localhost:5000/todo/add", newData)
+        .post("https://calm-springs-45611.herokuapp.com/todo/add", newData)
         .then((r) =>
           toast({
             title: "Your Task is added",

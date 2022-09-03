@@ -39,7 +39,7 @@ const Form = ({ onCancel, todo, trig }) => {
     }
     // console.log(todo._id, "id");
     await axios
-      .put(`http://localhost:5000/todo/update/${todo._id}`, data)
+      .put(`https://calm-springs-45611.herokuapp.com/todo/update/${todo._id}`, data)
       .then((r) => {
         trig();
       })
