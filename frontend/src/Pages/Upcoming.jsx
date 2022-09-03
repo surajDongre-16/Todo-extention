@@ -1,3 +1,4 @@
+import { Image } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -37,29 +38,38 @@ const Upcoming = () => {
 	},[todo])
 
 	return (
-		<>
-			<Navbar />
-			<div
-				id="Activity"
-				style={{ width: "80%", margin: "auto", marginTop: "40px" }}
-			>
-				<h2 style={{ fontSize: "24px", fontWeight: "600" }}>
-					Upcoming Tasks ({upcominTasks.length})
-				</h2>
-				<br />
-				{upcominTasks.length ? (
-					upcominTasks.map((ele, indx) => {
-						if (indx) {
-							return [];
-						}
-						return <TodoList key={ele._id} todo={upcominTasks} setTrig={setTrig} />;
-					})
-				) : (
-					<p>There are no Upcoming Task assigned</p>
-				)}
-			</div>
-		</>
-	);
+    <>
+      <Navbar />
+      <div
+        id="Activity"
+        style={{ width: "80%", margin: "auto", marginTop: "40px" }}
+      >
+        {upcominTasks.length>0 ?
+		 <h2 style={{ fontSize: "24px", fontWeight: "600" }}>
+          Upcoming Tasks ({upcominTasks.length})
+        </h2>:""}
+        <br />
+        {upcominTasks.length ? (
+          upcominTasks.map((ele, indx) => {
+            if (indx) {
+              return [];
+            }
+            return (
+              <TodoList key={ele._id} todo={upcominTasks} setTrig={setTrig} />
+            );
+          })
+        ) : (
+          <>
+            {/* <p>There are no Upcoming Task assigned</p> */}
+            <Image
+              src="https://c.tenor.com/JBdfqjaxCsIAAAAi/head-empty-fuwa.gif"
+              alt="empty"
+            />
+          </>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Upcoming;

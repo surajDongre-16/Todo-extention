@@ -8,6 +8,8 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
+  Text,
+  useToast,
 } from "@chakra-ui/react";
 import AddIcon from "@mui/icons-material/Add";
 import "./stylesheets/addtaskModal.css";
@@ -17,8 +19,9 @@ import CalendarComp from "./Calendar";
 import axios from "axios";
 
 const AddTaskModal = ({ setTrig }) => {
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [data, setFormData] = useState({});
+  const [data, setFormData] = useState({ title: "", description: "" });
   const [date, setDate] = useState(null);
   const [tag, setTag] = useState(null);
   const handleChange = (e) => {
@@ -30,18 +33,34 @@ const AddTaskModal = ({ setTrig }) => {
   };
 
   const handleSubmit = async () => {
-    let newData = {
-      ...data,
-      date: date.toISOString().split("T")[0],
-      category: tag,
-      user: JSON.parse(localStorage.getItem("user"))._id,
-    };
-    await axios
-      .post("http://localhost:5000/todo/add", newData)
-      .then((r) => console.log(r))
-      .catch((e) => console.log(e));
+    if (tag === null || date === null) {
+      toast({
+        title: "Please Select Both Tag and Date",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    } else {
+      let newData = {
+        ...data,
+        date: date.toLocaleDateString(),
+        category: tag,
+        user: JSON.parse(localStorage.getItem("user"))._id,
+      };
+      await axios
+        .post("http://localhost:5000/todo/add", newData)
+        .then((r) =>
+          toast({
+            title: "Your Task is added",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          })
+        )
+        .catch((e) => console.log(e));
 
-    setTrig((prev) => !prev);
+      setTrig((prev) => !prev);
+    }
   };
 
   return (
@@ -57,6 +76,7 @@ const AddTaskModal = ({ setTrig }) => {
               name="title"
               type="text"
               onChange={handleChange}
+              value={data.title}
             />
             <textarea
               placeholder="Add a description to your todo"
@@ -65,12 +85,18 @@ const AddTaskModal = ({ setTrig }) => {
               cols="50"
               name="description"
               onChange={handleChange}
+              value={data.description}
             ></textarea>
 
             <div>
               <CalendarComp onClick={(value) => setDate(value)} />
-
+              {date && <Text color="green">{date.toLocaleDateString()}</Text>}
               <div>
+                {tag && (
+                  <Text color="purple" fontWeight={"bolder"}>
+                    {tag}
+                  </Text>
+                )}
                 <AddLabel setTag={setTag} />
                 <AddTimer />
               </div>
@@ -78,12 +104,12 @@ const AddTaskModal = ({ setTrig }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button size="sm" variant="ghost" mr={3} onClick={onClose}>
+            <Button size="sm" mr={3} onClick={onClose} colorScheme="red">
               Cancle
             </Button>
             <Button
               size="sm"
-              colorScheme="red"
+              colorScheme="green"
               onClick={() => {
                 handleSubmit();
                 onClose();
