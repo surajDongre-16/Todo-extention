@@ -25,7 +25,7 @@ const Completed = () => {
 
 	const sendRequest = async () => {
 		const res = await axios
-			.get(`http://localhost:5000/todo/user/${id}`)
+			.get(`https://calm-springs-45611.herokuapp.com/todo/user/${id}`)
 			.catch((err) => console.log(err));
 		const data = await res.data;
 		return data;
@@ -45,7 +45,7 @@ const Completed = () => {
 
 	const handleDelete = async (e) => {
 		await axios
-			.delete(`http://localhost:5000/todo/${e._id}`)
+			.delete(`https://calm-springs-45611.herokuapp.com/todo/${e._id}`)
 			.then((r) => handleTrig())
 			.catch((e) => console.log(e));
 	};

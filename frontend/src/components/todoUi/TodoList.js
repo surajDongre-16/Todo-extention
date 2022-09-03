@@ -24,7 +24,7 @@ const TodoList = ({ todo , setTrig }) => {
 		};
 		// console.log(newData)
 		await axios
-			.put(`http://localhost:5000/todo/update/${e._id}`, newData)
+			.put(`https://calm-springs-45611.herokuapp.com/todo/update/${e._id}`, newData)
 			.then((r) => {
 				// console.log(r)
 				handleTrig();
@@ -35,7 +35,7 @@ const TodoList = ({ todo , setTrig }) => {
 
 	const handleDelete = async (e) => {
 		await axios
-			.delete(`http://localhost:5000/todo/${e._id}`)
+			.delete(`https://calm-springs-45611.herokuapp.com/todo/${e._id}`)
 			.then((r) => handleTrig())
 			.catch((e) => console.log(e));
 	};
