@@ -98,6 +98,7 @@ const TodoAdd = ({ setTrig }) => {
             h="2.5rem"
             name="category"
             type="text"
+            ml={2}
             onChange={handleChange}
           >
             <option>select</option>
