@@ -3,6 +3,9 @@ const mongoose=require("mongoose")
 const todorouter = require("./routes/todo-routes")
 const router = require("./routes/user-routes")
 const cors =require("cors")
+const connection=require("./config/db")
+require("dotenv").config();
+const PORT=process.env.PORT
 
 const app=express()
 app.use(cors())
@@ -16,8 +19,15 @@ app.get("/",(req,res)=>{
     res.send("Welcome")
 })
 
-mongoose.connect(
-    "mongodb+srv://shristi:shristi123@cluster0.imvho.mongodb.net/todoextension?retryWrites=true&w=majority"
-).then(()=>app.listen(5000)).then(()=>
-console.log("connected port 5000")
-).catch((err)=>console.log(err))
+
+
+app.listen(PORT, async() => {
+    try{
+        await connection;   
+        console.log("connected to db successfully")
+    }
+    catch{
+        console.log("something went wrong while connecting to db")
+    }
+    console.log(`Server listening on localhost:${PORT}`)
+})
