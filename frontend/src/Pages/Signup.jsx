@@ -80,12 +80,14 @@ const Signup = () => {
           style={{ width: "26rem", margin: "auto" }}
         >
           <Input
+            isRequired
             name="name"
             type="name"
             placeholder="Enter your name"
             onChange={handleChange}
           />
           <Input
+          isRequired
             name="email"
             type="email"
             placeholder="Enter your email"
@@ -93,6 +95,7 @@ const Signup = () => {
             mt="2rem"
           />
           <Input
+          isRequired
             name="password"
             type="password"
             placeholder="Enter your password"
