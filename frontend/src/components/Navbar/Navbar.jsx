@@ -187,7 +187,8 @@ const Navbar = ({setTrig}) => {
               <MenuItem
                 onClick={(e) => {
                   localStorage.setItem("token", "");
-                  localStorage.setItem("id", "");
+                //   localStorage.setItem("id", "");
+                  localStorage.setItem("user", "");
                   dispatch(action.switch_page("login"));
                 }}
               >
