@@ -24,7 +24,7 @@ const Signup = () => {
     e.preventDefault();
     console.log(data, "data");
     axios
-      .post("http://localhost:5000/user/signup", data)
+      .post("https://calm-springs-45611.herokuapp.com/user/signup", data)
       .then((res) => {
         // console.log(res);
 
@@ -34,7 +34,7 @@ const Signup = () => {
   };
 
   const handleGoogle = () => {
-    fetch("http://localhost:5000/user/auth/google/callback")
+    fetch("https://calm-springs-45611.herokuapp.com/user/auth/google/callback")
       .then((res) => console.log(res))
       .then((res) => {
         // console.log(res, "google");
