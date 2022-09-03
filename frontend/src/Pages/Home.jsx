@@ -75,7 +75,7 @@ const Home = () => {
 	return (
 		<div id="home">
 			<Navbar setTrig={setTrig} />
-			<TodoMain todo={todos} setTrig={setTrig} />
+			<TodoMain todo={todos || []} setTrig={setTrig} />
 		</div>
 	);
 };
