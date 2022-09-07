@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-const CalendarComp = ({ onClick }) => {
+const CalendarComp = ({ onClick,date }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, onChange] = useState(new Date());
 
@@ -25,8 +25,8 @@ const CalendarComp = ({ onClick }) => {
   return (
     <>
       <Button onClick={onOpen}>
-        <CalendarMonthIcon />
-        <Text ml="0.5rem">Today</Text>
+        <CalendarMonthIcon style={{color:"green"}}/>
+        <Text color="green" ml="0.5rem">{date.toLocaleDateString()!==(new Date()).toLocaleDateString()?date.toLocaleDateString():"Today"}</Text>
       </Button>
 
       <Modal

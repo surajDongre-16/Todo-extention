@@ -11,7 +11,7 @@ import {
 import TodoList from "./TodoList";
 import TodoAdd from "./TodoAdd";
 
-const TodoMain = ({ todo, setTrig }) => {
+const TodoMain = ({ isLoading,LoadingInterface,todo, setTrig }) => {
  
   const { isOpen, onToggle } = useDisclosure();
   return (
@@ -25,7 +25,7 @@ const TodoMain = ({ todo, setTrig }) => {
         Today
       </Text>
 
-      <TodoList todo={todo} setTrig={setTrig} />
+      {isLoading.current?LoadingInterface.current:<TodoList todo={todo} setTrig={setTrig} />}
 
       <Box height="70px" paddingTop={5}>
         <Button onClick={onToggle} bg="white" color="red">

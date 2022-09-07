@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	HStack,
 	VStack,
@@ -13,6 +13,8 @@ import Edit from "./Edit";
 import axios from "axios";
 
 const TodoList = ({ todo , setTrig }) => {
+
+
 	const handleTrig = () => {
 		setTrig((prev) => !prev);
 	};
@@ -43,8 +45,8 @@ const TodoList = ({ todo , setTrig }) => {
 	return (
 		<VStack>
 			{todo.length ? (
-				todo.map((el) => (
-					<>
+				todo.map((el,indx) => (
+					<React.Fragment key={indx}>
 						{!el.status ? (
 							<>
 								<HStack
@@ -81,6 +83,8 @@ const TodoList = ({ todo , setTrig }) => {
 											ml="auto"
 										>
 											<DeleteIcon
+												fontSize="18px"
+												cursor="pointer"
 												color="red.500"
 												onClick={(e) => handleDelete(el)}
 											/>
@@ -91,9 +95,9 @@ const TodoList = ({ todo , setTrig }) => {
 								</HStack>
 							</>
 						) : (
-							""
+							''
 						)}
-					</>
+					</React.Fragment>
 				))
 			) : (
 				<Image

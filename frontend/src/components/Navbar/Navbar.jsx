@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./stylesheets/navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import TimelineIcon from '@mui/icons-material/Timeline';
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import TodayIcon from "@mui/icons-material/Today";
 import SearchIcon from "@mui/icons-material/Search";
@@ -29,8 +29,6 @@ import {
 } from "@chakra-ui/react";
 
 import AddTaskModal from "./AddTaskModal";
-
-import { AiOutlineSetting } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { MdToday } from "react-icons/md";
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -101,7 +99,7 @@ const Navbar = ({setTrig}) => {
           <HomeIcon />
         </div>
         <div>
-          <SearchIcon />
+          <SearchIcon cursor="pointer"/>
           <input type="text" />
         </div>
       </div>
@@ -110,11 +108,11 @@ const Navbar = ({setTrig}) => {
           <AddTaskModal setTrig={setTrig} />
         </div>
         <div className="hover" onClick={()=>handleClick("activity")}>
-          <CheckCircleOutlineIcon />
+          <TimelineIcon/>
         </div>
-        {/* <div className="hover">
-          <NotificationsIcon />
-        </div> */}
+        <div className="hover" onClick={()=>handleClick("completed")}>
+          <CheckCircleOutlineIcon/>
+        </div>
 
         <div>
           <Menu>
@@ -187,7 +185,6 @@ const Navbar = ({setTrig}) => {
               <MenuItem
                 onClick={(e) => {
                   localStorage.setItem("token", "");
-                //   localStorage.setItem("id", "");
                   localStorage.setItem("user", "");
                   dispatch(action.switch_page("login"));
                 }}
