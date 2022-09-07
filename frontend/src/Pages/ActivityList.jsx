@@ -1,5 +1,5 @@
-import { Flex, Select, Image } from "@chakra-ui/react";
-import React from "react";
+import { Flex, Select, Image, Box } from "@chakra-ui/react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar/Navbar";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import * as action from "../Redux/action";
+import { Skeleton, SkeletonCircle } from "@chakra-ui/react";
 
 const ActivityList = () => {
 	const todo = useSelector((store) => store.todo);
@@ -16,6 +17,8 @@ const ActivityList = () => {
 	const [sort, setSort] = useState("completed");
 	const id = JSON.parse(localStorage.getItem("user"))._id;
 	const dispatch = useDispatch();
+	const isLoading = useRef(true);
+	const RenderBody = useRef(<></>);
 
 	const [trig, setTrig] = useState(false);
 
@@ -35,9 +38,12 @@ const ActivityList = () => {
 	}, [setSort]);
 
 	useEffect(() => {
-		sendRequest().then((data) => {
-			dispatch(action.setTodo(data.todos));
-		});
+		setTimeout(() => {
+			sendRequest().then((data) => {
+				dispatch(action.setTodo(data.todos));
+			});
+			isLoading.current = false;
+		}, 800);
 	}, [trig, dispatch]);
 
 	const sendRequest = async () => {
@@ -49,54 +55,106 @@ const ActivityList = () => {
 	};
 
 	const handleChange = (e) => {
+		isLoading.current = true;
 		setSort(e.target.value);
 	};
 
 	useEffect(() => {
-		switch (sort) {
-			case "All tasks":
-				setRender(todo);
-				break;
-			case "completed":
-				setRender(
-					todo.filter((ele) => {
-						return ele.status;
-					})
-				);
-				break;
+		setTimeout(() => {
+			isLoading.current = false;
+			switch (sort) {
+				case "All tasks":
+					setRender(todo);
+					break;
+				case "completed":
+					setRender(
+						todo.filter((ele) => {
+							return ele.status;
+						})
+					);
+					break;
 
-			case "pending":
-				setRender(
-					todo.filter((ele) => {
-						return !ele.status;
-					})
-				);
-				break;
-			case "today": {
-				let today = new Date();
-				let curDate = today.getDate();
-				setRender(
-					todo.filter((ele) => {
-						let date = Number(ele.date.split("/")[1]);
-						return date == curDate;
-					})
-				);
-				break;
+				case "pending":
+					setRender(
+						todo.filter((ele) => {
+							return !ele.status;
+						})
+					);
+					break;
+				case "today": {
+					let today = new Date();
+					let curDate = today.getDate();
+					setRender(
+						todo.filter((ele) => {
+							let date = Number(ele.date.split("/")[1]);
+							return date == curDate;
+						})
+					);
+					break;
+				}
+				case "upcoming":
+					let today = new Date();
+					let curDate = today.getDate();
+					setRender(
+						todo.filter((ele) => {
+							let date = Number(ele.date.split("/")[1]);
+							return date > curDate;
+						})
+					);
+					break;
+				default:
+					break;
 			}
-			case "upcoming":
-				let today = new Date();
-				let curDate = today.getDate();
-				setRender(
-					todo.filter((ele) => {
-						let date = Number(ele.date.split("/")[1]);
-						return date > curDate;
-					})
-				);
-				break;
-			default:
-				break;
-		}
+		}, 500);
 	}, [sort, todo]);
+
+	if (isLoading.current) {
+		RenderBody.current = [
+			<Flex>
+				<SkeletonCircle size="14" />
+				<Box style={{ marginLeft: "30px", marginTop: "6px" }}>
+					<Skeleton width="250px" height="14px"></Skeleton>
+					<Skeleton marginTop="14px" width="80px" height="14px"></Skeleton>
+				</Box>
+			</Flex>,
+			<>
+				<br />
+			</>,
+			<Flex>
+				<SkeletonCircle size="14" />
+				<Box style={{ marginLeft: "30px", marginTop: "6px" }}>
+					<Skeleton width="250px" height="14px"></Skeleton>
+					<Skeleton marginTop="14px" width="80px" height="14px"></Skeleton>
+				</Box>
+			</Flex>,
+			<>
+				<br />
+			</>,
+			<Flex>
+				<SkeletonCircle size="14" />
+				<Box style={{ marginLeft: "30px", marginTop: "6px" }}>
+					<Skeleton width="250px" height="14px"></Skeleton>
+					<Skeleton marginTop="14px" width="80px" height="14px"></Skeleton>
+				</Box>
+			</Flex>,
+		];
+	} else if (!isLoading.current && render.length) {
+		RenderBody.current = render.map((ele) => (
+			<ActivityItem
+				key={ele._id}
+				task={ele}
+				status={ele.status}
+				handleDelete={handleDelete}
+			/>
+		));
+	} else if (!isLoading.current && !render.length) {
+		RenderBody.current = (
+			<Image
+				src="https://cdn.dribbble.com/users/634336/screenshots/2246883/_____.png"
+				alt="empty"
+			/>
+		);
+	}
 
 	return (
 		<>
@@ -117,21 +175,7 @@ const ActivityList = () => {
 				</Flex>
 				<br />
 
-				{render.length ? (
-					render.map((ele) => (
-						<ActivityItem
-							key={ele._id}
-							task={ele}
-							status={ele.status}
-							handleDelete={handleDelete}
-						/>
-					))
-				) : (
-					<Image
-						src="https://cdn.dribbble.com/users/634336/screenshots/2246883/_____.png"
-						alt="empty"
-					/>
-				)}
+				{RenderBody.current}
 			</div>
 		</>
 	);

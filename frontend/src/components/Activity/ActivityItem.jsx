@@ -1,5 +1,4 @@
-import { fontSize } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./ActivityItem.css";
 import { DeleteIcon } from "@chakra-ui/icons";
 
@@ -31,7 +30,7 @@ const ActivityItem = ({ task, status, handleDelete }) => {
 						</p>
 					</div>
 					<div style={{ marginLeft: "auto", color: "red" }}>
-						<DeleteIcon  onClick={(e)=> handleDelete(task)}/>
+						<DeleteIcon fontSize="20px" cursor="pointer"  onClick={(e)=> handleDelete(task)}/>
 					</div>
 				</div>
 			</div>

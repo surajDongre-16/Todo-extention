@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "browser_action": {
     "default_popup": "index.html",
-    "default_icon": "todo.png"
+    "default_icon": "TodoLogo.png"
   },
   "permissions": [
     "activeTab"
