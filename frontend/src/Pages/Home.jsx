@@ -55,7 +55,7 @@ const Home = () => {
 	useEffect(() => {
 		let today = new Date();
 		let curDate = today.getDate();
-
+		if(!todo.length) return
 		setTimeout(() => {
 			setTodos(
 				todo.filter((ele) => {
